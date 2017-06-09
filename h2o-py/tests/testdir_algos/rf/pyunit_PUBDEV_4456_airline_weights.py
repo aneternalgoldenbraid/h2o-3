@@ -12,12 +12,11 @@ def test_data_with_weights():
   train = splits[0]
   test = splits[1]
 
-  hh1 = H2ORandomForestEstimator(ntrees=1000, seed=1234)
+  hh1 = H2ORandomForestEstimator(ntrees=1000, seed=1234, score_tree_interval=10, stopping_rounds=20,
+                                 stopping_metric="AUC", stopping_tolerance=0.001, max_runtime_secs=20*60)
 
 
-  hh1.train(x=range(10), y=31, training_frame=train, validation_frame=test, weights_column="weight",
-            score_tree_interval=10, stopping_rounds=20, stopping_metric="AUC", stopping_tolerance=0.001,
-            max_runtime_secs=20*60)
+  hh1.train(x=list(range(10)), y=30, training_frame=train, validation_frame=test, weights_column="weight")
 
 
 if __name__ == "__main__":
